@@ -15,6 +15,33 @@ header {
     align-items: center;
     box-shadow: 0 2px 2px 0 rgb(0 0 0 / 20%);
     font-family: 'Dancing Script', cursive;
+    display: flex;
+    justify-content: space-between;
+}
+
+header img {
+    height: 20px;
+    width: 20px;
+}
+
+header a {
+    text-decoration: none;
+    color: black;
+    padding-left: 18px;
+}
+
+.headerIcons {
+    padding: 30px;
+}
+
+.headerIcons img {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.headerIcons img:hover {
+    cursor: pointer;
+    opacity: 0.7;
 }
 
 .postContent {
