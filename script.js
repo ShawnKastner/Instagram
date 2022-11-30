@@ -37,6 +37,11 @@ let posts = [{
 ];
 
 function show() {
+    showR();
+    showProfiles();
+}
+
+function showR() {
     for (let i = 0; i < posts.length; i++) {
         const element = posts[i];
         
@@ -59,6 +64,6 @@ function show() {
             <span><b>${element['author']}</b></span>
             <span class="distancePadding">${element['description']}</span>
             </div>
-        </div>`
+        </div>`;
     }
 }
