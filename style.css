@@ -72,22 +72,34 @@ header a {
     width: 100%;
 }
 
-.headline {
+.imgHeadline {
     display: flex;
-    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
     width: 100%;
     margin-top: 20px;
     margin-bottom: 20px;
     margin-left: 10px;
+    padding-left: 16px;
 }
 
-.distancePadding {
-    padding-left: 8px;
+.authorContainer {
+    display: flex;
+    gap: 8px;
+}
+
+.locationContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.locationContainer span {
+    font-size: 12px;
 }
 
 .profileImg {
-    height: 20px !important;
-    width: 20px !important;
+    height: 30px !important;
+    width: 30px !important;
     border-radius: 100%;
 }
 
@@ -97,6 +109,7 @@ header a {
     width: 100%;
     display: flex;
     margin-left: 8px;
+    gap: 8px;
 }
 
 .icons {
@@ -129,13 +142,6 @@ header a {
     margin-top: 6px;
 }
 
-.profileImgRight {
-    height: 30px;
-    width: 30px;
-    border-radius: 100%;
-    padding-right: 8px;
-}
-
 .profileContent {
     width: 20%;
     display: flex;
@@ -147,9 +153,23 @@ header a {
     gap: 8px;
 }
 
+.suggestions {
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    color: #595959;
+}
+
+.nameImg {
+    display: flex;
+    gap: 8px;
+}
+
 .profileContainer {
     display: flex;
     margin-top: 16px;
+    gap: 8px;
+    justify-content: space-between;
 }
 
 .followButton {

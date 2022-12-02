@@ -15,20 +15,20 @@ let posts = [{
     'likes': 'Gefällt 470 Mal'
 },
 {
-    'author': 'Conny',
-    'profileImg': 'img/connyProfile.jpeg',
-    'image': 'img/maja6.jpg',
-    'description': 'Maja beim Springen',
-    'location': 'Bamberg',
-    'likes': 'Gefällt 56 Mal'
-},
-{
     'author': 'Shawn',
     'profileImg': 'img/shawnProfile.jpg',
     'image': 'img/shiva&maja.jpg',
     'description': 'Shiva und Maja zusammen auf der Altenburg auf dem Turm',
     'location': 'Altenburg Bamberg',
     'likes': 'Gefällt 34 Mal'
+},
+{
+    'author': 'Conny',
+    'profileImg': 'img/connyProfile.jpeg',
+    'image': 'img/maja6.jpg',
+    'description': 'Maja beim Springen',
+    'location': 'Bamberg',
+    'likes': 'Gefällt 56 Mal'
 },
 {
     'author': 'Sidney',
@@ -45,6 +45,14 @@ let posts = [{
     'description': 'Shiva in ihrem Körbchen',
     'location': 'Bamberg',
     'likes': 'Gefällt 225 Mal'
+},
+{
+    'author': 'Conny',
+    'profileImg': 'img/connyProfile.jpeg',
+    'image': 'img/bootÄgypten.jpg',
+    'description': 'Private Bootstour auf dem roten Meer',
+    'location': 'Ägypten',
+    'likes': 'Gefällt 356 Mal'
 },
 {
     'author': 'Shawn',
@@ -93,9 +101,14 @@ function follow(i) {
 function showTemplate(element) {
     return /*html*/`
     <div class="postContent">
-        <div class="headline">
-            <img class="profileImg" src="${element['profileImg']}">
-            <div class="distancePadding"><span><b>${element['author']}</b></span></div>
+        <div class="imgHeadline">
+            <div class="authorContainer">
+                <img class="profileImg" src="${element['profileImg']}">
+                <div class="locationContainer">
+                    <span><b>${element['author']}</b></span>
+                    <span>${element['location']}</span>
+                </div>
+            </div>
         </div>
         <img src="${element['image']}">
         <div class="icons">
@@ -116,7 +129,9 @@ function showTemplate(element) {
 function profilesTemplate(profile, i) {
     return /*html*/`
     <div class="profileContainer">
-        <img class="profileImgRight" src="${profile['img']}"><span><b>${profile['author']}</b></span>
+        <div class="nameImg">
+            <img class="profileImg" src="${profile['img']}"><span><b>${profile['author']}</b></span>
+        </div>
         <button onclick="follow(${i})" id="followButton${i}" class="followButton"><b>Folgen</b></button>
     </div>`;
 }
