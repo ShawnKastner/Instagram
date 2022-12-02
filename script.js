@@ -106,7 +106,7 @@ function showTemplate(element) {
                 <img class="profileImg" src="${element['profileImg']}">
                 <div class="locationContainer">
                     <span><b>${element['author']}</b></span>
-                    <span>${element['location']}</span>
+                    <span class="locationSpan">${element['location']}</span>
                 </div>
             </div>
         </div>
@@ -121,7 +121,11 @@ function showTemplate(element) {
         </div>  
         <div class="description">
         <span><b>${element['author']}</b></span>
-        <span class="distancePadding">${element['description']}</span>
+        <span>${element['description']}</span>
+        </div>
+        <div class="commentContainer">
+            <input class="commentInput" placeholder="Kommentieren...">
+            <button>Posten</button>
         </div>
     </div>`;
 }
@@ -132,6 +136,6 @@ function profilesTemplate(profile, i) {
         <div class="nameImg">
             <img class="profileImg" src="${profile['img']}"><span><b>${profile['author']}</b></span>
         </div>
-        <button onclick="follow(${i})" id="followButton${i}" class="followButton"><b>Folgen</b></button>
+        <button onclick="follow(${i})" id="followButton${i}"><b>Folgen</b></button>
     </div>`;
 }

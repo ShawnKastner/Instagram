@@ -93,7 +93,7 @@ header a {
     flex-direction: column;
 }
 
-.locationContainer span {
+.locationSpan {
     font-size: 12px;
 }
 
@@ -172,16 +172,32 @@ header a {
     justify-content: space-between;
 }
 
-.followButton {
+button {
     border: none;
     background-color: unset;
     color: #3aadf7;
 }
 
-.followButton:hover {
+button:hover {
     cursor: pointer;
 }
 
 .clickFollow {
     color: grey;
+}
+
+.commentContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    border-top: solid 1px black;
+}
+
+.commentInput {
+    border: none;
+    margin-left: 45px;
+    width: 80%;
+    height: 30px;
 }
