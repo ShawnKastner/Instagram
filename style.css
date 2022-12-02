@@ -3,6 +3,10 @@
     font-style: normal;
     src: local(''),
         url('font/DancingScript-Bold.ttf') format('ttf'),
+        url('font/DancingScript-Medium.ttf') format('ttf'),
+        url('font/DancingScript-Regular.ttf') format('ttf'),
+        url('font/DancingScript-SemiBold.ttf') format('ttf'),
+        url('font/DancingScript-VariableFont_wght.ttf') format('ttf'),
 }
 
 body {
@@ -129,16 +133,23 @@ header a {
     height: 30px;
     width: 30px;
     border-radius: 100%;
+    padding-right: 8px;
 }
 
 .profileContent {
     width: 20%;
     display: flex;
     justify-content: flex-start;
+    flex-direction: column;
     position: absolute;
     top: 100px;
     right: 0;
     gap: 8px;
+}
+
+.profileContainer {
+    display: flex;
+    margin-top: 16px;
 }
 
 .followButton {
@@ -151,4 +162,6 @@ header a {
     cursor: pointer;
 }
 
-
+.clickFollow {
+    color: grey;
+}
