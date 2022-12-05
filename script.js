@@ -1,10 +1,10 @@
 let posts = [{
     'author': 'Conny',
-    'profileImg': 'img/connyProfile.jpeg',
+    'profileImg': 'img/connyProfile.jpg',
     'image': 'img/maja2.jpg',
     'description': 'Selten aber wahr, Maja springt nach einem Ball',
     'location': 'Bamberg',
-    'likes': 'Gefällt 133 Mal'
+    'likes': 'Gefällt 133 Mal',
 },
 {
     'author': 'Sidney',
@@ -12,7 +12,7 @@ let posts = [{
     'image': 'img/sonnenuntergang.jpg',
     'description': 'Sonnenuntergang über der Wüste, in Ägypten',
     'location': 'Ägypten',
-    'likes': 'Gefällt 470 Mal'
+    'likes': 'Gefällt 470 Mal',
 },
 {
     'author': 'Shawn',
@@ -20,15 +20,15 @@ let posts = [{
     'image': 'img/shiva&maja.jpg',
     'description': 'Shiva und Maja zusammen auf der Altenburg auf dem Turm',
     'location': 'Altenburg Bamberg',
-    'likes': 'Gefällt 34 Mal'
+    'likes': 'Gefällt 34 Mal',
 },
 {
     'author': 'Conny',
-    'profileImg': 'img/connyProfile.jpeg',
+    'profileImg': 'img/connyProfile.jpg',
     'image': 'img/maja6.jpg',
     'description': 'Maja beim Springen',
     'location': 'Bamberg',
-    'likes': 'Gefällt 56 Mal'
+    'likes': 'Gefällt 56 Mal',
 },
 {
     'author': 'Sidney',
@@ -36,7 +36,7 @@ let posts = [{
     'image': 'img/brandenburgerTor.jpg',
     'description': 'Das Brandenburger Tor in Berlin',
     'location': 'Berlin',
-    'likes': 'Gefällt 123 Mal'
+    'likes': 'Gefällt 123 Mal',
 },
 {
     'author': 'Shawn',
@@ -44,15 +44,15 @@ let posts = [{
     'image': 'img/shiva9.jpg',
     'description': 'Shiva in ihrem Körbchen',
     'location': 'Bamberg',
-    'likes': 'Gefällt 225 Mal'
+    'likes': 'Gefällt 225 Mal',
 },
 {
     'author': 'Conny',
-    'profileImg': 'img/connyProfile.jpeg',
+    'profileImg': 'img/connyProfile.jpg',
     'image': 'img/bootÄgypten.jpg',
     'description': 'Private Bootstour auf dem roten Meer',
     'location': 'Ägypten',
-    'likes': 'Gefällt 356 Mal'
+    'likes': 'Gefällt 356 Mal',
 },
 {
     'author': 'Shawn',
@@ -60,7 +60,7 @@ let posts = [{
     'image': 'img/shiva10.jpg',
     'description': 'Da will man einmal ein ordentliches Foto und der Hund macht quatsch',
     'location': 'Bamberg',
-    'likes': 'Gefällt 260 Mal'
+    'likes': 'Gefällt 260 Mal',
 }];
 
 let profiles = [{
@@ -74,19 +74,20 @@ let profiles = [{
 {
     'author': 'Sidney',
     'img': 'img/sidneyProfile.jpg'
-}
-]
+}]
 
-function show() {
-    showProfiles();
+let comments = [];
+
+function render() {
+    renderProfiles();
     for (let i = 0; i < posts.length; i++) {
         const element = posts[i];
 
-        document.getElementById('postContent').innerHTML += showTemplate(element);
+        document.getElementById('postContent').innerHTML += showTemplate(element, i);
     }
 }
 
-function showProfiles() {
+function renderProfiles() {
     for (let i = 0; i < profiles.length; i++) {
         const profile = profiles[i];
 
@@ -95,10 +96,24 @@ function showProfiles() {
 }
 
 function follow(i) {
-    document.getElementById(`followButton${i}`).innerHTML = /*html*/`<span class="clickFollow"><b>Gefolgt</b></span>`;
+    document.getElementById(`followButton${i}`).innerHTML = /*html*/`
+        <span class="clickFollow"><b>Gefolgt</b></span>`;
 }
 
-function showTemplate(element) {
+function post(i) {
+    let comment = document.getElementById(`inputComment${i}`).value;
+    comments.push(comment);
+
+    let myComment = document.getElementById(`writeComment${i}`);        
+    myComment.innerHTML += /*html*/`
+    <div>
+        <span><b>Shawn</b></span>
+        <span>${comment}</span>
+    </div>`; 
+    document.getElementById(`inputComment${i}`).value = '';
+}
+
+function showTemplate(element, i) {
     return /*html*/`
     <div class="postContent">
         <div class="imgHeadline">
@@ -123,9 +138,10 @@ function showTemplate(element) {
         <span><b>${element['author']}</b></span>
         <span>${element['description']}</span>
         </div>
-        <div class="commentContainer">
-            <input class="commentInput" placeholder="Kommentieren...">
-            <button>Posten</button>
+        <div class="commentsContainer" id="writeComment${i}"></div>
+        <div class="commentInputContainer">
+            <input id="inputComment${i}" class="commentInput" type="text" placeholder="Kommentieren...">
+            <button onclick="post(${i})">Posten</button>
         </div>
     </div>`;
 }
