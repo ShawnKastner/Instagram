@@ -67,7 +67,7 @@ header a {
 
 .postContent img {
     border: 1px solid black;
-    height: 600px;
+    height: 800px;
     object-fit: cover;
     width: 100%;
 }
@@ -208,7 +208,84 @@ button:hover {
     margin-left: 8px;
 }
 
-.d-none {
-    display: none;
-}
+@media screen {
+    @media (max-width: 1000px) {
+        .postContent img {
+            height: 700px;
+        }
 
+        .icons img{
+            height: 20px
+        }
+    }
+
+    @media (max-width:950px) {
+        .profileContainer {
+            display: none;
+        }
+
+        .suggestions {
+            display: none;
+        }
+
+        .postContent {
+            width: 80%;
+        }
+    }
+
+    @media (max-width:650px) {
+        .postContent {
+            width: 70%;
+        }
+
+        .postContent img {
+            height: 500px;
+        }
+
+        .headerIcons {
+            display: none;
+        }     
+        
+        .icons img{
+            height: 20px
+        }
+    }
+
+    @media (max-width: 550px) {
+        .postContent img {
+            height: 400px;
+        }
+
+        .icons img{
+            height: 20px
+        }
+    }
+
+    @media (max-width: 500px) {
+        .postContent {
+            width: 60%;
+        }
+
+        .postContent img{
+            height: 300px;
+        } 
+
+        header {
+            justify-content: center;
+        }
+
+        .d-none {
+            display: none;
+        }
+
+        .icons img{
+            height: 20px
+        }
+    }
+
+    @media (max-width: 350px) {
+        .postContent img {
+            height: 200px;
+        }
+    }
+}
