@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram</title>
+    <title>Picturegram</title>
 
     <script src="script.js"></script>
     <link rel="stylesheet" href="style.css">
@@ -13,12 +13,12 @@
 
 </head>
 
-<body onload="render()">
+<body onload="renderContent()">
     <header>
         <a href="index.html">
             <h1>Picturegram</h1>
         </a>
-        <input class="d-none" placeholder="Suche">
+        <input class="d-none" id="search" onkeydown="filterNames()" placeholder="Suche">
         <div class="headerIcons">
             <img src="img/compass.ico">
             <img class="arrowRotate" src="img/share.ico">
@@ -26,7 +26,7 @@
         </div>
     </header>
 
-    <div id="postContent"></div>
+    <div class="completeContent" id="postContent"></div>
     <div class="profileContent" id="profiles">
         <div class="suggestions">
             <span><b>Vorschläge für dich</b></span>

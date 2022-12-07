@@ -61,14 +61,13 @@ header a {
     border: 1px solid black;
     margin-top: 20px;
     margin-left: 100px;
-    width: 60%;
+    width: 50%;
     border-radius: 10px;
 }
 
 .postContent img {
     border: 1px solid black;
-    height: 800px;
-    object-fit: cover;
+    object-fit: contain;
     width: 100%;
 }
 
@@ -100,6 +99,7 @@ header a {
 .profileImg {
     height: 30px !important;
     width: 30px !important;
+    object-fit: cover !important;
     border-radius: 100%;
 }
 
@@ -172,7 +172,7 @@ header a {
     justify-content: space-between;
 }
 
-button {
+.followButton {
     border: none;
     background-color: unset;
     color: #3aadf7;
@@ -210,10 +210,6 @@ button:hover {
 
 @media screen {
     @media (max-width: 1000px) {
-        .postContent img {
-            height: 700px;
-        }
-
         .icons img{
             height: 20px
         }
@@ -234,12 +230,15 @@ button:hover {
     }
 
     @media (max-width:650px) {
-        .postContent {
-            width: 70%;
+        .completeContent {
+            display: flex;
+        flex-direction: column;
+        align-items: center;
         }
 
-        .postContent img {
-            height: 500px;
+        .postContent {
+            width: 80%;
+            margin-left: unset;
         }
 
         .headerIcons {
@@ -252,24 +251,12 @@ button:hover {
     }
 
     @media (max-width: 550px) {
-        .postContent img {
-            height: 400px;
-        }
-
         .icons img{
             height: 20px
         }
     }
 
     @media (max-width: 500px) {
-        .postContent {
-            width: 60%;
-        }
-
-        .postContent img{
-            height: 300px;
-        } 
-
         header {
             justify-content: center;
         }
@@ -280,12 +267,6 @@ button:hover {
 
         .icons img{
             height: 20px
-        }
-    }
-
-    @media (max-width: 350px) {
-        .postContent img {
-            height: 200px;
         }
     }
 }

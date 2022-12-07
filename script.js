@@ -5,6 +5,7 @@ let posts = [{
     'description': 'Selten aber wahr, Maja springt nach einem Ball',
     'location': 'Bamberg',
     'likes': 'Gefällt 133 Mal',
+    'comments': [],
 },
 {
     'author': 'Sidney',
@@ -13,6 +14,7 @@ let posts = [{
     'description': 'Sonnenuntergang über der Wüste, in Ägypten',
     'location': 'Ägypten',
     'likes': 'Gefällt 470 Mal',
+    'comments': [],
 },
 {
     'author': 'Shawn',
@@ -21,6 +23,7 @@ let posts = [{
     'description': 'Shiva und Maja zusammen auf der Altenburg auf dem Turm',
     'location': 'Altenburg Bamberg',
     'likes': 'Gefällt 34 Mal',
+    'comments': [],
 },
 {
     'author': 'Conny',
@@ -29,6 +32,7 @@ let posts = [{
     'description': 'Maja beim Springen',
     'location': 'Bamberg',
     'likes': 'Gefällt 56 Mal',
+    'comments': [],
 },
 {
     'author': 'Sidney',
@@ -37,6 +41,7 @@ let posts = [{
     'description': 'Das Brandenburger Tor in Berlin',
     'location': 'Berlin',
     'likes': 'Gefällt 123 Mal',
+    'comments': [],
 },
 {
     'author': 'Shawn',
@@ -45,6 +50,7 @@ let posts = [{
     'description': 'Shiva in ihrem Körbchen',
     'location': 'Bamberg',
     'likes': 'Gefällt 225 Mal',
+    'comments': [],
 },
 {
     'author': 'Conny',
@@ -53,6 +59,7 @@ let posts = [{
     'description': 'Private Bootstour auf dem roten Meer',
     'location': 'Ägypten',
     'likes': 'Gefällt 356 Mal',
+    'comments': [],
 },
 {
     'author': 'Shawn',
@@ -61,6 +68,7 @@ let posts = [{
     'description': 'Da will man einmal ein ordentliches Foto und der Hund macht quatsch',
     'location': 'Bamberg',
     'likes': 'Gefällt 260 Mal',
+    'comments': [],
 }];
 
 let profiles = [{
@@ -76,14 +84,29 @@ let profiles = [{
     'img': 'img/sidneyProfile.jpg'
 }]
 
-let comments = [];
+function renderContent() {
+    render();
+    renderProfiles();
+}
 
 function render() {
-    renderProfiles();
+    let content = document.getElementById('postContent');
+    content.innerHTML = '';
+
     for (let i = 0; i < posts.length; i++) {
         const element = posts[i];
 
-        document.getElementById('postContent').innerHTML += showTemplate(element, i);
+        content.innerHTML += showTemplate(element, i);
+
+        let myComment = document.getElementById(`writeComment${i}`);
+        for (let j = 0; j < element['comments'].length; j++) {
+            const comment = element['comments'][j];
+            myComment.innerHTML += /*html*/`
+        <div>
+            <span><b>Shawn</b></span>
+            <span>${comment}</span>
+        </div>`;
+        }
     }
 }
 
@@ -97,25 +120,19 @@ function renderProfiles() {
 
 function follow(i) {
     document.getElementById(`followButton${i}`).innerHTML = /*html*/`
-        <span class="clickFollow"><b>Gefolgt</b></span>`;
+    <span onclick="unfollowed(${i})" id="followed${i}" class="clickFollow"><b>Gefolgt</b></span>`;
 }
 
-function post(i) {
-    let comment = document.getElementById(`inputComment${i}`).value;
-    comments.push(comment);
-
-    let myComment = document.getElementById(`writeComment${i}`);        
-    myComment.innerHTML += /*html*/`
-    <div>
-        <span><b>Shawn</b></span>
-        <span>${comment}</span>
-    </div>`; 
+function addComment(i) {
+    let comment = document.getElementById(`inputComment${i}`);
+    posts[i]['comments'].push(comment.value);
+    render();
     document.getElementById(`inputComment${i}`).value = '';
 }
 
 function showTemplate(element, i) {
     return /*html*/`
-    <div class="postContent">
+    <div id="content" class="postContent">
         <div class="imgHeadline">
             <div class="authorContainer">
                 <img class="profileImg" src="${element['profileImg']}">
@@ -141,7 +158,7 @@ function showTemplate(element, i) {
         <div class="commentsContainer" id="writeComment${i}"></div>
         <div class="commentInputContainer">
             <input id="inputComment${i}" class="commentInput" type="text" placeholder="Kommentieren...">
-            <button onclick="post(${i})">Posten</button>
+            <button class="followButton" onclick="addComment(${i})">Posten</button>
         </div>
     </div>`;
 }
@@ -152,6 +169,6 @@ function profilesTemplate(profile, i) {
         <div class="nameImg">
             <img class="profileImg" src="${profile['img']}"><span><b>${profile['author']}</b></span>
         </div>
-        <button onclick="follow(${i})" id="followButton${i}"><b>Folgen</b></button>
+        <button onclick="follow(${i})" class="followButton" id="followButton${i}"><b>Folgen</b></button>
     </div>`;
 }
