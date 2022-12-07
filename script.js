@@ -4,7 +4,7 @@ let posts = [{
     'image': 'img/maja2.jpg',
     'description': 'Selten aber wahr, Maja springt nach einem Ball',
     'location': 'Bamberg',
-    'likes': 'Gefällt 133 Mal',
+    'likes': 133,
     'comments': [],
 },
 {
@@ -13,7 +13,7 @@ let posts = [{
     'image': 'img/sonnenuntergang.jpg',
     'description': 'Sonnenuntergang über der Wüste, in Ägypten',
     'location': 'Ägypten',
-    'likes': 'Gefällt 470 Mal',
+    'likes': 470,
     'comments': [],
 },
 {
@@ -22,7 +22,7 @@ let posts = [{
     'image': 'img/shiva&maja.jpg',
     'description': 'Shiva und Maja zusammen auf der Altenburg auf dem Turm',
     'location': 'Altenburg Bamberg',
-    'likes': 'Gefällt 34 Mal',
+    'likes': 34,
     'comments': [],
 },
 {
@@ -31,7 +31,7 @@ let posts = [{
     'image': 'img/maja6.jpg',
     'description': 'Maja beim Springen',
     'location': 'Bamberg',
-    'likes': 'Gefällt 56 Mal',
+    'likes': 56,
     'comments': [],
 },
 {
@@ -40,7 +40,7 @@ let posts = [{
     'image': 'img/brandenburgerTor.jpg',
     'description': 'Das Brandenburger Tor in Berlin',
     'location': 'Berlin',
-    'likes': 'Gefällt 123 Mal',
+    'likes': 123,
     'comments': [],
 },
 {
@@ -49,7 +49,7 @@ let posts = [{
     'image': 'img/shiva9.jpg',
     'description': 'Shiva in ihrem Körbchen',
     'location': 'Bamberg',
-    'likes': 'Gefällt 225 Mal',
+    'likes': 225,
     'comments': [],
 },
 {
@@ -58,7 +58,7 @@ let posts = [{
     'image': 'img/bootÄgypten.jpg',
     'description': 'Private Bootstour auf dem roten Meer',
     'location': 'Ägypten',
-    'likes': 'Gefällt 356 Mal',
+    'likes': 356,
     'comments': [],
 },
 {
@@ -67,7 +67,7 @@ let posts = [{
     'image': 'img/shiva10.jpg',
     'description': 'Da will man einmal ein ordentliches Foto und der Hund macht quatsch',
     'location': 'Bamberg',
-    'likes': 'Gefällt 260 Mal',
+    'likes': 260,
     'comments': [],
 }];
 
@@ -94,18 +94,14 @@ function render() {
     content.innerHTML = '';
 
     for (let i = 0; i < posts.length; i++) {
-        const element = posts[i];
+        const post = posts[i];
 
-        content.innerHTML += showTemplate(element, i);
+        content.innerHTML += renderTemplate(post, i);
 
         let myComment = document.getElementById(`writeComment${i}`);
-        for (let j = 0; j < element['comments'].length; j++) {
-            const comment = element['comments'][j];
-            myComment.innerHTML += /*html*/`
-        <div>
-            <span><b>Shawn</b></span>
-            <span>${comment}</span>
-        </div>`;
+        for (let j = 0; j < post['comments'].length; j++) {
+            const comment = post['comments'][j];
+            myComment.innerHTML += addCommentTemplate(comment);
         }
     }
 }
@@ -130,36 +126,78 @@ function addComment(i) {
     document.getElementById(`inputComment${i}`).value = '';
 }
 
-function showTemplate(element, i) {
+function like(i) {
+    document.getElementById(`changeToRed${i}`).classList.add('hide');
+    document.getElementById(`redHeart${i}`).classList.remove('hide');
+
+    posts[i].likes++;
+    document.getElementById(`liked${i}`).innerHTML = /*html*/`
+    <b>Gefällt ${posts[i].likes} Mal</b>`;
+}
+
+function unlike(i) {
+    document.getElementById(`changeToRed${i}`).classList.remove('hide');
+    document.getElementById(`redHeart${i}`).classList.add('hide');
+
+    posts[i].likes--;
+    document.getElementById(`liked${i}`).innerHTML = /*html*/`
+    <b>Gefällt ${posts[i].likes} Mal</b>`;
+}
+
+// function filterNames() {
+//     let search = document.getElementById('search').value;
+//     search = search.toLowerCase();
+
+//     let list = document.getElementById('content');
+//     list.innerHTML = '';
+
+//     for (let i = 0; i < names.length; i++) {
+//         let name = posts[i];
+//             if (name.toLowerCase().includes(search)) {
+//             list.innerHTML += `<li>${name}</li>`;
+//         }
+//     }
+// }
+
+function renderTemplate(post, i) {
     return /*html*/`
     <div id="content" class="postContent">
         <div class="imgHeadline">
             <div class="authorContainer">
-                <img class="profileImg" src="${element['profileImg']}">
+                <img class="profileImg" src="${post['profileImg']}">
                 <div class="locationContainer">
-                    <span><b>${element['author']}</b></span>
-                    <span class="locationSpan">${element['location']}</span>
+                    <span><b>${post['author']}</b></span>
+                    <span class="locationSpan">${post['location']}</span>
                 </div>
             </div>
         </div>
-        <img src="${element['image']}">
+        <img src="${post['image']}">
         <div class="icons">
-            <img src="img/favorite.ico">
+            <img onclick="like(${i})" id="changeToRed${i}" src="img/favorite.ico">
+            <img onclick="unlike(${i})" class="hide" id="redHeart${i}" src="img/favoriteFilled.ico">
             <img src="img/speech.ico">
             <img class="arrowRotate" src="img/share.ico">
         </div>
         <div class="likes">
-            <span><b>${element['likes']}</b></span>
+            <span id="liked${i}"><b>Gefällt ${post['likes']} Mal</b></span>
         </div>  
         <div class="description">
-        <span><b>${element['author']}</b></span>
-        <span>${element['description']}</span>
+        <span><b>${post['author']}</b></span>
+        <span>${post['description']}</span>
         </div>
         <div class="commentsContainer" id="writeComment${i}"></div>
         <div class="commentInputContainer">
             <input id="inputComment${i}" class="commentInput" type="text" placeholder="Kommentieren...">
             <button class="followButton" onclick="addComment(${i})">Posten</button>
         </div>
+    </div>`;
+}
+
+function addCommentTemplate(comment) {
+    return /*html*/`
+    <div>
+        <span><b>Shawn</b></span>
+        <span>${comment}</span>
     </div>`;
 }
 

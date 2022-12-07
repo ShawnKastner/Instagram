@@ -208,6 +208,10 @@ button:hover {
     margin-left: 8px;
 }
 
+.hide {
+    display: none;
+}
+
 @media screen {
     @media (max-width: 1000px) {
         .icons img{
