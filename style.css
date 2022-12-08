@@ -198,8 +198,14 @@ button:hover {
 .commentInput {
     border: none;
     margin-left: 45px;
-    width: 80%;
     height: 30px;
+    width: 80%;
+}
+
+form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .commentsContainer {

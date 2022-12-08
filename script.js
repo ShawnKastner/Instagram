@@ -187,8 +187,10 @@ function renderTemplate(post, i) {
         </div>
         <div class="commentsContainer" id="writeComment${i}"></div>
         <div class="commentInputContainer">
-            <input id="inputComment${i}" class="commentInput" type="text" placeholder="Kommentieren...">
-            <button class="followButton" onclick="addComment(${i})">Posten</button>
+            <form onsubmit="addComment(${i}); return false;">
+                <input id="inputComment${i}" minlength="3" required class="commentInput" type="text" placeholder="Kommentieren...">
+                <button class="followButton">Posten</button>
+            </form>
         </div>
     </div>`;
 }
