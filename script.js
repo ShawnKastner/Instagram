@@ -115,8 +115,13 @@ function renderProfiles() {
 }
 
 function follow(i) {
-    document.getElementById(`followButton${i}`).innerHTML = /*html*/`
-    <span onclick="unfollowed(${i})" id="followed${i}" class="clickFollow"><b>Gefolgt</b></span>`;
+    document.getElementById(`followButton${i}`).classList.add('hide');
+    document.getElementById(`followed${i}`).classList.remove('hide');
+}
+
+function unfollow(i) {
+    document.getElementById(`followButton${i}`).classList.remove('hide');
+    document.getElementById(`followed${i}`).classList.add('hide');
 }
 
 function addComment(i) {
@@ -189,7 +194,7 @@ function renderTemplate(post, i) {
         <div class="commentInputContainer">
             <form onsubmit="addComment(${i}); return false;">
                 <input id="inputComment${i}" minlength="3" required class="commentInput" type="text" placeholder="Kommentieren...">
-                <button class="followButton">Posten</button>
+                <button class="blueButton">Posten</button>
             </form>
         </div>
     </div>`;
@@ -207,8 +212,9 @@ function profilesTemplate(profile, i) {
     return /*html*/`
     <div class="profileContainer">
         <div class="nameImg">
-            <img class="profileImg" src="${profile['img']}"><span><b>${profile['author']}</b></span>
+            <img class="profileImg" src="${profile['img']}"><span><b>${profile['author']}</b></button>
         </div>
-        <button onclick="follow(${i})" class="followButton" id="followButton${i}"><b>Folgen</b></button>
+        <button onclick="follow(${i})" class="blueButton" id="followButton${i}"><b>Folgen</b></span>
+        <button onclick="unfollow(${i})" class="blueButton clickFollow hide" id="followed${i}"><b>Gefolgt</b></button>
     </div>`;
 }

@@ -172,10 +172,11 @@ header a {
     justify-content: space-between;
 }
 
-.followButton {
+.blueButton {
     border: none;
     background-color: unset;
     color: #3aadf7;
+    cursor: pointer;
 }
 
 button:hover {
