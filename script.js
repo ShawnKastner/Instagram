@@ -149,20 +149,25 @@ function unlike(i) {
     <b>Gefällt ${posts[i].likes} Mal</b>`;
 }
 
-// function filterNames() {
-//     let search = document.getElementById('search').value;
-//     search = search.toLowerCase();
+function filterNames() {
+    let search = document.getElementById('search').value;
+    search = search.toLowerCase();
 
-//     let list = document.getElementById('content');
-//     list.innerHTML = '';
+    let list = document.getElementById('content');
+    list.innerHTML = '';
 
-//     for (let i = 0; i < names.length; i++) {
-//         let name = posts[i];
-//             if (name.toLowerCase().includes(search)) {
-//             list.innerHTML += `<li>${name}</li>`;
-//         }
-//     }
-// }
+    for (let i = 0; i < posts.length; i++) {
+        let name = posts[i]['author']
+        let profile = posts[i]['profileImg'];
+        let location = posts[i]['location'];
+        let image = posts[i]['image'];
+        let description = posts[i]['description'];
+        let likes = posts[i]['likes']
+        if (name.toLowerCase().includes(search)) {
+            list.innerHTML = filterNamesTemplate(profile, name, location, image, likes, description, i);
+        }
+    }
+}
 
 function renderTemplate(post, i) {
     return /*html*/`
@@ -216,5 +221,41 @@ function profilesTemplate(profile, i) {
         </div>
         <button onclick="follow(${i})" class="blueButton" id="followButton${i}"><b>Folgen</b></span>
         <button onclick="unfollow(${i})" class="blueButton clickFollow hide" id="followed${i}"><b>Gefolgt</b></button>
+    </div>`;
+}
+
+function filterNamesTemplate(profile, name, location, image, likes, description, i) {
+    return /*html*/`
+    <div>
+        <div class="imgHeadline">
+            <div class="authorContainer">
+                <img class="profileImg" src="${profile}">
+                    <div class="locationContainer">
+                        <span><b>${name}</b></span>
+                        <span class="locationSpan">${location}</span>
+                    </div>
+            </div>
+        </div>
+        <img src="${image}">
+        <div class="icons">
+            <img onclick="like(${i})" id="changeToRed${i}" src="img/favorite.ico">
+            <img onclick="unlike(${i})" class="hide" id="redHeart${i}" src="img/favoriteFilled.ico">
+            <img src="img/speech.ico">
+            <img class="arrowRotate" src="img/share.ico">
+        </div>
+        <div class="likes">
+            <span id="liked${i}"><b>Gefällt ${likes} Mal</b></span>
+        </div>  
+        <div class="description">
+            <span><b>${name}</b></span>
+            <span>${description}}</span>
+        </div>
+        <div class="commentsContainer" id="writeComment${i}"></div>
+        <div class="commentInputContainer">
+            <form onsubmit="addComment(${i}); return false;">
+            <input id="inputComment${i}" minlength="3" required class="commentInput" type="text" placeholder="Kommentieren...">
+            <button class="blueButton">Posten</button>
+            </form>
+        </div>
     </div>`;
 }
